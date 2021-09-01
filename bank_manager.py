@@ -14,7 +14,11 @@ class Account:
         self.pin = pin
 
     def __str__(self):
-        return f""
+        return f"User: {self.user_name}, Password: {self.password}\nBalance: ${numb_format(self.bal)}, PIN: {self.pin}"
+    def __repr__(self):
+        return f"Account({self.user_name},{self.password},{self.bal},{self.pin})"
+    def __del__(self):
+        print(f"User account: {self.user_name} deactivated, account has been wiped")
     
     def withdraw(self):
         withdraw_amount = input("Enter withdraw amount: ")
@@ -28,6 +32,9 @@ class Account:
     def deposit(self, deposit_amount):
         self.bal += deposit_amount
         print("You deposited ${deposit_amount}, current balance sits at: ${self.bal}")
+
+    def transfer(self, amount, recipient):
+        pass
     
     def numb_format(self, numb):
         """
@@ -38,14 +45,14 @@ class Account:
 
 def check_numb(user_input, check_type = int):
     # Check if user input is correct type, return desired type if correct, otherwise keep prompting 
-    flag = False
-    while flag == False:
+    flag = True
+    while flag == True:
         try:
             user_input = check_type(user_input)
         except ValueError:
             user_input = input("Please enter a number: ")
         else:
-            flag = True
+            flag = False
 
     return check_type(user_input)
 
@@ -56,6 +63,13 @@ def main():
     allocation = input("How many categories do you want to split your budget into: ")
     allocation = check_numb(allocation)
 
+
+def log_in():
+    pass
+
+
+def sign_up():
+    pass
 
 if __name__ == "__main__":
     main()
